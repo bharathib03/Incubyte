@@ -44,4 +44,5 @@ describe('AddCalcComponent', () => {
     expect(console.log).toHaveBeenCalledWith('Add is clicked');
     expect(console.log).toHaveBeenCalledWith('Val is ', ''); // Empty value check
   });
+  
 });
