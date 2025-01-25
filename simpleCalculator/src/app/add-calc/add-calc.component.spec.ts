@@ -17,7 +17,7 @@ describe('AddCalcComponent', () => {
     fixture.detectChanges();
   });
 
-  fit('should create the component', () => {
+  it('should create the component', () => {
     expect(component).toBeTruthy();
   });
 
@@ -44,5 +44,5 @@ describe('AddCalcComponent', () => {
     expect(console.log).toHaveBeenCalledWith('Add is clicked');
     expect(console.log).toHaveBeenCalledWith('Val is ', ''); // Empty value check
   });
-  
+
 });
