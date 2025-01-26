@@ -11,7 +11,8 @@ export class CalcService {
 
   constructor(private http: HttpClient) { }
   addData(data: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/addCalc/add`, data).pipe(
+    let payload = {"value":data}
+    return this.http.post(`${this.apiUrl}/addCalc/add`, payload).pipe(
       catchError(this.handleError)
     );
   }
