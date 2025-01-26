@@ -1,4 +1,4 @@
-<body>
+<!-- <body>
   <div class="center-div">
     <h4>Simple Calculator</h4>
       <input class="myInput" placeholder="Enter the number" [(ngModel)]="inputNum" [value]="inputNum"(change)="handleFileInput($event)">
@@ -14,5 +14,24 @@
         </div>
   </div>
   
-</body>
+</body> -->
+<h1>Simple Calculator</h1>
+<form class="example-form">
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Enter the number</mat-label>
+    <input matInput [(ngModel)]="inputNum" [ngModelOptions]="{standalone: true}">
+    <button matSuffix mat-icon-button aria-label="Clear" (click)="clearInput()">
+      <mat-icon>close</mat-icon>
+    </button>
+  
+  </mat-form-field>
+</form>
 
+<div class="example-button-row">
+  <button mat-raised-button color="primary" (click)="addData()">Calculate</button>
+</div>
+
+<div class="example-button-row" *ngIf="showResult">
+  <h3 *ngIf="!showRedMsg">Sum is {{finalOutput}}</h3>
+  <h3 class="alertMsg" *ngIf="showRedMsg">{{finalOutput}}</h3>
+</div>

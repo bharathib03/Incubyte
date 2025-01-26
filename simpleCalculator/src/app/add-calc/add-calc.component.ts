@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CalcService } from '../calc.service';
 
+
 @Component({
   selector: 'app-add-calc',
   templateUrl: './add-calc.component.html',
@@ -34,9 +35,10 @@ export class AddCalcComponent implements OnInit {
     });
   }
 
-  handleFileInput(event:any){
+  clearInput(){
     this.showResult = false;
     this.showRedMsg = false;
+    this.inputNum = ''
   }
 
 }
