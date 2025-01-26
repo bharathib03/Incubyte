@@ -8,21 +8,20 @@ import { HttpClientTestingModule } from '@angular/common/http/testing'; // Impor
 describe('AddCalcComponent', () => {
   let component: AddCalcComponent;
   let fixture: ComponentFixture<AddCalcComponent>;
-  let calcServiceMock: jasmine.SpyObj<CalcService>;
+  let calcService: CalcService;
 
   beforeEach(async () => {
-    const spy = jasmine.createSpyObj('CalcService', ['addData']);
-
     await TestBed.configureTestingModule({
       declarations: [AddCalcComponent],
-      imports: [FormsModule, HttpClientTestingModule], // Required for ngModel or two-way binding
+      imports: [FormsModule, HttpClientTestingModule],
+      providers: [CalcService],
     }).compileComponents();
-
-    calcServiceMock = TestBed.inject(CalcService) as jasmine.SpyObj<CalcService>;
   });
+
   beforeEach(() => {
     fixture = TestBed.createComponent(AddCalcComponent);
     component = fixture.componentInstance;
+    calcService = TestBed.inject(CalcService); // Inject CalcService
     fixture.detectChanges();
   });
 
@@ -30,30 +29,39 @@ describe('AddCalcComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should call calcService.addData() and handle success response', () => {
-    // Mock a successful response
-    const mockResponse = { result: 6 };
-    calcServiceMock.addData.and.returnValue(of(mockResponse));
-
-    component.inputNum = '123';
+  it('should call addData() and handle successful response', () => {
+    const mockResponse = { result: 42 };
+    spyOn(calcService, 'addData').and.returnValue(of(mockResponse));
+    spyOn(console, 'log'); 
+    component.inputNum = '10';
     component.addData();
 
-    expect(calcServiceMock.addData).toHaveBeenCalledWith('123');
-    expect(calcServiceMock.addData).toHaveBeenCalledTimes(1);
+    expect(calcService.addData).toHaveBeenCalledWith('10');
+    expect(component.showResult).toBeTrue();
+    expect(component.showRedMsg).toBeFalse();
+    expect(component.finalOutput).toBe(42);
+    expect(console.log).toHaveBeenCalledWith('Data added successfully:', mockResponse);
   });
 
-  it('should handle error response from calcService.addData()', () => {
-    // Mock an error response
+  it('should call addData() and handle error response', () => {
     const mockError = 'Error adding data';
-    calcServiceMock.addData.and.returnValue(throwError(() => mockError));
+    spyOn(calcService, 'addData').and.returnValue(throwError(() => mockError)); // Mock service error
 
-    component.inputNum = '123';
+    component.inputNum = '10';
     component.addData();
 
-    expect(calcServiceMock.addData).toHaveBeenCalledWith('123');
+    expect(calcService.addData).toHaveBeenCalledWith('10');
+    expect(component.showResult).toBeFalse();
     expect(component.errorMessage).toBe(mockError);
   });
 
+  it('should reset flags when handleFileInput() is called', () => {
+    component.showResult = true;
+    component.showRedMsg = true;
 
+    component.handleFileInput({});
 
+    expect(component.showResult).toBeFalse();
+    expect(component.showRedMsg).toBeFalse();
+  });
 });
