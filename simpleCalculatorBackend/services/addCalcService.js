@@ -26,8 +26,7 @@ export const addCalcService = async (userData) => {
 
   function sumOfAllNumbers(input){
         //Business logic to remove backslashes, delimiters, and new lines  
-        input = input.replace(/[/\\*]/g, "").replace(/[^\w\s]/gi, '').replace(/[^\x20-\x7E]/gmi, '').trim();
-
+        input = input.replace(/[/\\*]/g, "").replace(/[^\w\s]/gi, '').replace(/[^\x20-\x7E]/gmi, '').replace(/[a-zA-Z]/g, '').trim();
         //After removing all delimiters, backslashes, and new lines trim it and convert it to array
         let newUserArray = input.split('');
         //Reduce function to sum all the elements in an array

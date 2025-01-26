@@ -5,6 +5,6 @@ export const addController = async (req, res) => {
       const addOutput = await addCalcService(userData);
       res.status(201).send({ result: addOutput });
     } catch (error) {
-      res.status(500).send({ message: 'Error creating user', error: error.message });
+      res.status(500).send({ message: 'Error adding numbers', error: error.message });
     }
   };
