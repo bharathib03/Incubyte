@@ -1,11 +1,14 @@
 import bodyParser from 'body-parser'
 import express from 'express'
+import cors from 'cors'
 import addCalcRoutes from './routes/addCalc.js'
 
 const app = express();
 const router = express.Router();
 
 app.use(bodyParser.json());
+app.use(cors())
+
 app.use('/addCalc', addCalcRoutes);
 
 app.get('/', (req, res) => { 
