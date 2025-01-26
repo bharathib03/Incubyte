@@ -29,9 +29,4 @@ export class AddCalcComponent implements OnInit {
     });
   }
 
-  add(){
-    console.log("Add is clicked")
-    console.log("Val is ",this.inputNum)
-  }
-
 }
