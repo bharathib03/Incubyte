@@ -1,7 +1,18 @@
-<div style="justify-content: center; align-items: center">
-    <input matInput required placeholder="Enter the number" [(ngModel)]="inputNum" [value]="inputNum">
-    <div class="container">
-        <button type="button" (click)="addData()">Calculate</button>
-      </div>
-</div>
+<body>
+  <div class="center-div">
+    <h4>Simple Calculator</h4>
+      <input class="myInput" placeholder="Enter the number" [(ngModel)]="inputNum" [value]="inputNum"(change)="handleFileInput($event)">
+      <div class="container">
+        <br>
+          <button type="button" (click)="addData()">Calculate</button>
+        </div>
+        <br>
+        <div *ngIf="showResult">
+          <label *ngIf="!showRedMsg">Sum is {{finalOutput}}</label>
+          <label class="alertMsg" *ngIf="showRedMsg">{{finalOutput}}</label>
+
+        </div>
+  </div>
+  
+</body>
 

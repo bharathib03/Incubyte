@@ -11,22 +11,32 @@ import { CalcService } from '../calc.service';
 export class AddCalcComponent implements OnInit {
   inputNum : string = '';
   errorMessage: any;
+  finalOutput:any; 
+  showResult:boolean = false;
+  showRedMsg:boolean = false;
 
   constructor(private calcService: CalcService) { }
  
   ngOnInit(): void {
-    
   }
   addData(): void {
     this.calcService.addData(this.inputNum).subscribe({
       next: (response) => {
         console.log('Data added successfully:', response);
+        this.showResult = true;
+        this.showRedMsg = (typeof (response.result) == 'string') ? true : false
+        this.finalOutput = response.result
       },
       error: (error) => {
         this.errorMessage = error;
         console.error('Error adding data:', error);
       },
     });
+  }
+
+  handleFileInput(event:any){
+    this.showResult = false;
+    this.showRedMsg = false;
   }
 
 }

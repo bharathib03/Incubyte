@@ -1,0 +1,19 @@
+
+.center-div {
+    padding: 5%;
+    background: white;
+    border: 1px solid #ccc;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f3f3f3; /* Optional, just for styling */
+  }
+
+  .alertMsg{
+    color: red;
+  }
