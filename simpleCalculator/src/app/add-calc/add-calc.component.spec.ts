@@ -55,13 +55,14 @@ describe('AddCalcComponent', () => {
     expect(component.errorMessage).toBe(mockError);
   });
 
-  it('should reset flags when handleFileInput() is called', () => {
+  it('should reset flags when clearInput() is called', () => {
     component.showResult = true;
     component.showRedMsg = true;
 
-    component.handleFileInput({});
+    component.clearInput();
 
     expect(component.showResult).toBeFalse();
     expect(component.showRedMsg).toBeFalse();
+    expect(component.inputNum).toBe('');
   });
 });
